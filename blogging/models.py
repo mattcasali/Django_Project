@@ -24,3 +24,13 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
+class CategoryAdmin(admin.ModelAdmin):
+    exclude = ('posts',)
+
+class CategoryInline(admin.TabularInline):
+    model = Category.posts.through
+
+class PostAdmin(admin.ModelAdmin):
+    inlines = [
+        CategoryInline,
+    ]
